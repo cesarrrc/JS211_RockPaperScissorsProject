@@ -15,6 +15,24 @@ const rl = readline.createInterface({
 const rockPaperScissors = (hand1, hand2) => {
 
   // Write code here
+  hand1 = hand1.trim().toLowerCase();
+  hand2 = hand2.trim().toLowerCase();
+
+  if (hand1 === hand2)  {
+    return "The Game is a draw!";
+  } else if (hand1 === "rock" && hand2 === "paper")  {
+    return "Hand 2 WINS!";
+  } if (hand1 === "paper" && hand2 === "scissors")  {
+    return "Hand 2 WINS!";
+  } else if (hand1 === "scissors" && hand2 === "rock")  {
+    return "Hand 2 WINS!";
+  } if (hand1 === "paper" && hand2 === "rock")  {
+    return "Hand 1 WINS!";
+  } else if (hand1 === "scissors" && hand2 === "paper")  {
+    return "Hand 1 WINS!";
+  } if (hand1 === "rock" && hand2 === "scissors")  {
+    return "Hand 1 WINS!";
+  }
   // Use the unit test to see what is expected
 
 }
@@ -39,22 +57,24 @@ if (typeof describe === 'function') {
   // most are notes for human eyes to read, but essentially passes in inputs then compares if the function you built return the expected output.
   describe('#rockPaperScissors()', () => {
     it('should detect a tie', () => {
-      assert.equal(rockPaperScissors('rock', 'rock'), "It's a tie!");
-      assert.equal(rockPaperScissors('paper', 'paper'), "It's a tie!");
-      assert.equal(rockPaperScissors('scissors', 'scissors'), "It's a tie!");
+      assert.equal(rockPaperScissors('rock', 'rock'), "The Game is a draw!");
+      assert.equal(rockPaperScissors('paper', 'paper'), "The Game is a draw!");
+      assert.equal(rockPaperScissors('scissors', 'scissors'), "The Game is a draw!");
     });
     it('should detect which hand won', () => {
-      assert.equal(rockPaperScissors('rock', 'paper'), "Hand two wins!");
-      assert.equal(rockPaperScissors('paper', 'scissors'), "Hand two wins!");
-      assert.equal(rockPaperScissors('rock', 'scissors'), "Hand one wins!");
+      assert.equal(rockPaperScissors('rock', 'paper'), "Hand 2 WINS!");
+      assert.equal(rockPaperScissors('paper', 'scissors'), "Hand 2 WINS!");
+      assert.equal(rockPaperScissors('rock', 'scissors'), "Hand 1 WINS!");
     });
     it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
-      assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
-      assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
-      assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
+      assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand 2 WINS!");
+      assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand 2 WINS!");
+      assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand 1 WINS!");
     });
   });
+  
 } else {
+
 
   // always returns ask the user for another input
   getPrompt();
