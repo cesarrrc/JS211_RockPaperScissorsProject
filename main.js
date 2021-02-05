@@ -14,23 +14,32 @@ const rl = readline.createInterface({
 // the function that will be called by the unit test below
 const rockPaperScissors = (hand1, hand2) => {
 
-  // Write code here
+  // When input is entered, it will be called here and scrubbed
+  // of its white space and make all the letters lower-cased and
+  // then stored in the appropriate variables.
   hand1 = hand1.trim().toLowerCase();
   hand2 = hand2.trim().toLowerCase();
 
+
+  // this if(statement) will return a draw if the
+  // argument passed in are BOTH the same.
   if (hand1 === hand2)  {
     return "The Game is a draw!";
-  } else if (hand1 === "rock" && hand2 === "paper")  {
+  } 
+  // these else if(statements) will compare hand1 and hand2
+  // by using conditional statements (&&) and declare a winner
+  // on the argument pass through. 
+  else if (hand1 === "rock" && hand2 === "paper")  {
     return "Hand 2 WINS!";
-  } if (hand1 === "paper" && hand2 === "scissors")  {
+  } else if (hand1 === "paper" && hand2 === "scissors")  {
     return "Hand 2 WINS!";
   } else if (hand1 === "scissors" && hand2 === "rock")  {
     return "Hand 2 WINS!";
-  } if (hand1 === "paper" && hand2 === "rock")  {
+  } else if (hand1 === "paper" && hand2 === "rock")  {
     return "Hand 1 WINS!";
   } else if (hand1 === "scissors" && hand2 === "paper")  {
     return "Hand 1 WINS!";
-  } if (hand1 === "rock" && hand2 === "scissors")  {
+  } else if (hand1 === "rock" && hand2 === "scissors")  {
     return "Hand 1 WINS!";
   }
   // Use the unit test to see what is expected
@@ -72,6 +81,43 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand 1 WINS!");
     });
   });
+
+  // below are additional Unit Tests
+
+  describe('additional RPS Unit Test Assigment', function(){
+
+    it('should scrub white space before and after the input', function(){
+      let actual = rockPaperScissors('   roc   k', '  pa   p e   r')
+      let expected = 'Hand 2 WINS!'
+      assert.equal(actual, expected)
+    })
+
+    it('should detect no input has been typed', function(){
+      let actual = rockPaperScissors('', "  ")
+      let expected = 'You must type something in and try again!'
+      assert.equal(actual, expected)
+    })
+
+    it('should not allow input to be a bad word', function(){
+      let actual = rockPaperScissors('poopoo', 'peepee')
+      let expected = "Please don't use bad language"
+      assert.equal(actual, expected)
+    })
+
+    it('can handle numbers with greaternumber being the winner', function(){
+      let actual = rockPaperScissors('10', '05')
+      let expected = "Hand 1 WINS!"
+      assert.equal(actual, expected)
+    })
+
+    it('can handle spanish words and declare a winner', function(){
+      let actual = rockPaperScissors("pierda", "papel")
+      let expected = 'Hand 2 WINS!'
+      assert.equal(actual, expected)
+    })
+
+  })
+
   
 } else {
 
